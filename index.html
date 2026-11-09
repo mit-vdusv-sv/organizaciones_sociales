@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta name="description" content="Revisión de requisitos y generación de documentos para personalidad jurídica de organizaciones sociales bajo el Acuerdo MIT-MIT-25-60-ACU." />
+    <title>Revisor de Personalidad Jurídica | MIT</title>
+    <link rel="stylesheet" href="styles-v5.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <div>
+          <p class="eyebrow">Ministerio de Infraestructura y Tecnología</p>
+          <h1>Revisor de Personalidad Jurídica</h1>
+        </div>
+      </div>
+      <div class="top-actions">
+        <button class="button button-ghost" id="export-case" type="button">Exportar trámite</button>
+        <label class="button button-ghost file-button">Importar trámite<input id="import-case" type="file" accept="application/json" /></label>
+        <button class="button button-danger" id="new-case" type="button">Nuevo trámite</button>
+      </div>
+    </header>
+
+    <main class="app-shell">
+      <aside class="sidebar" aria-label="Navegación del trámite">
+        <div class="case-summary">
+          <span class="case-kicker">Expediente activo</span>
+          <strong id="case-name">Sin nombre</strong>
+          <span id="case-number">Sin número de trámite</span>
+        </div>
+        <nav id="step-nav" class="step-nav">
+          <button type="button" data-step="1" class="active"><span>1</span>Datos del trámite</button>
+          <button type="button" data-step="2"><span>2</span>Organización y solicitante</button>
+          <button type="button" data-step="3"><span>3</span>Autoridad y documentos</button>
+          <button type="button" data-step="4"><span>4</span>Miembros fundadores</button>
+          <button type="button" data-step="5"><span>5</span>Checklist artículo 14</button>
+          <button type="button" data-step="6"><span>6</span>Resultado y descargas</button>
+        </nav>
+        <div class="legal-card">
+          <strong>Base jurídica</strong>
+          <span>Acuerdo MIT-MIT-25-60-ACU</span>
+          <span>Artículos 14, 16 y 17</span>
+          <span>Disposición General Tercera</span>
+        </div>
+      </aside>
+
+      <section class="workspace">
+        <div class="privacy-note"><span aria-hidden="true">●</span> Los datos se procesan en este navegador. El borrador se guarda localmente.</div>
+
+        <form id="case-form" novalidate>
+          <section class="panel step-panel active" data-step-panel="1">
+            <div class="panel-heading">
+              <div><span class="step-label">Paso 1 de 6</span><h2>Datos del trámite</h2></div>
+              <p>Registra los identificadores y fechas que aparecerán en los antecedentes.</p>
+            </div>
+            <div class="field-grid">
+              <label class="field"><span>Número de trámite *</span><input name="caseNumber" required placeholder="MIT-DD-2026-0001-E" /></label>
+              <label class="field"><span>Fecha de ingreso *</span><input name="entryDate" type="date" required /></label>
+              <label class="field"><span>Número del oficio de solicitud</span><input name="requestLetterNumber" placeholder="Sin número" /></label>
+              <label class="field"><span>Fecha del oficio de solicitud *</span><input name="requestLetterDate" type="date" required /></label>
+              <label class="field"><span>Tipo de trámite</span><select name="organizationDegree"><option value="primer">Organización de primer grado</option><option value="segundo">Organización de segundo grado</option><option value="tercer">Organización de tercer grado</option></select></label>
+              <label class="field"><span>Fecha del trámite original</span><input name="originalCaseDate" type="date" max="2025-11-08" /><small id="original-date-help">Úsala únicamente si el expediente fue presentado hasta el 8 de noviembre de 2025.</small></label>
+              <label class="field field-wide"><span>Antecedente adicional</span><textarea name="additionalBackground" rows="3" placeholder="Información que deba incorporarse en los antecedentes"></textarea></label>
+            </div>
+          </section>
+
+          <section class="panel step-panel" data-step-panel="2">
+            <div class="panel-heading"><div><span class="step-label">Paso 2 de 6</span><h2>Organización y solicitante</h2></div><p>Estos datos se reutilizan en todos los documentos.</p></div>
+            <div class="section-title">Organización</div>
+            <div class="field-grid">
+              <label class="field field-wide"><span>Denominación completa *</span><input name="organizationName" required placeholder="COMITÉ PRO-MEJORAS ..." /></label>
+              <label class="field"><span>Tipo de organización *</span><select name="organizationType"><option>Comité pro-mejoras</option><option>Comité barrial</option><option>Asociación</option><option>Fundación</option><option>Federación</option><option>Confederación</option><option>Unión</option><option>Cámara</option><option>Otra</option></select></label>
+              <label class="field"><span>Ámbito de acción *</span><input name="actionArea" required placeholder="Hábitat y vivienda" /></label>
+              <label class="field"><span>Parroquia *</span><input name="parish" required /></label>
+              <label class="field"><span>Cantón *</span><input name="canton" required /></label>
+              <label class="field"><span>Provincia *</span><input name="province" required /></label>
+              <label class="field"><span>Dirección del domicilio *</span><input name="legalAddress" required /></label>
+              <label class="field"><span>Alcance territorial *</span><input name="territorialScope" required placeholder="Parroquial, cantonal, provincial..." /></label>
+              <label class="field"><span>Patrimonio inicial *</span><input name="initialAssets" required placeholder="USD 400,00" /></label>
+              <label class="field field-wide"><span>Fines y objetivos generales *</span><textarea name="generalPurposes" required rows="3"></textarea></label>
+              <label class="field"><span>¿Realizará voluntariado?</span><select name="volunteering"><option value="no">No</option><option value="si">Sí</option></select></label>
+              <label class="field"><span>Fecha de asamblea constitutiva *</span><input name="assemblyDate" type="date" required /></label>
+            </div>
+            <div class="section-title">Solicitante</div>
+            <div class="field-grid">
+              <label class="field"><span>Nombres y apellidos *</span><input name="applicantName" required /></label>
+              <label class="field"><span>Calidad o cargo *</span><input name="applicantRole" required placeholder="Presidente provisional" /></label>
+              <label class="field"><span>Documento de identidad *</span><input name="applicantId" required /></label>
+              <label class="field"><span>Teléfono *</span><input name="applicantPhone" required /></label>
+              <label class="field"><span>Correo electrónico *</span><input name="applicantEmail" type="email" required /></label>
+              <label class="field"><span>Domicilio para notificaciones *</span><input name="notificationAddress" required /></label>
+            </div>
+          </section>
+
+          <section class="panel step-panel" data-step-panel="3">
+            <div class="panel-heading"><div><span class="step-label">Paso 3 de 6</span><h2>Autoridad y documentos</h2></div><p>Completa los datos que antes aparecían como “XXXX” en los modelos.</p></div>
+            <div class="section-title">Autoridad competente del MIT</div>
+            <div class="field-grid">
+              <label class="field"><span>Nombre de la autoridad *</span><input name="authorityName" required /></label>
+              <label class="field"><span>Cargo *</span><input name="authorityRole" required placeholder="Director/a Distrital de Transporte y Obras Públicas" /></label>
+              <label class="field field-wide"><span>Unidad administrativa *</span><input name="administrativeUnit" required placeholder="Dirección Distrital de Transporte y Obras Públicas de Pichincha" /></label>
+              <label class="field"><span>Número del acto de nombramiento *</span><input name="appointmentNumber" required placeholder="Acción de Personal Nro. ..." /></label>
+              <label class="field"><span>Fecha del nombramiento *</span><input name="appointmentDate" type="date" required /></label>
+              <label class="field"><span>Ciudad de emisión *</span><input name="issueCity" required placeholder="Quito, D.M." /></label>
+              <label class="field"><span>Fecha de emisión *</span><input name="issueDate" type="date" required /></label>
+            </div>
+            <div class="section-title">Resolución e informe</div>
+            <div class="field-grid">
+              <label class="field"><span>Número de resolución *</span><input name="resolutionNumber" required placeholder="MIT-DDTOP-2026-0001-R" /></label>
+              <label class="field"><span>Número de informe o memorando *</span><input name="legalReportNumber" required /></label>
+              <label class="field"><span>Fecha del informe *</span><input name="legalReportDate" type="date" required /></label>
+              <label class="field"><span>Responsable del informe *</span><input name="legalAnalystName" required /></label>
+              <label class="field"><span>Cargo del responsable *</span><input name="legalAnalystRole" required /></label>
+              <label class="field"><span>Estatuto</span><select name="statuteModification"><option value="sin">Sin modificación</option><option value="con">Con modificaciones incorporadas</option></select></label>
+              <label class="field field-wide"><span>Detalle de modificaciones</span><textarea name="modificationDetail" rows="3"></textarea></label>
+            </div>
+          </section>
+
+          <section class="panel step-panel" data-step-panel="4">
+            <div class="panel-heading"><div><span class="step-label">Paso 4 de 6</span><h2>Miembros fundadores</h2></div><p>La nómina se incorporará en la resolución.</p></div>
+            <div class="member-toolbar"><span id="member-count">0 miembros</span><button class="button button-secondary" id="add-member" type="button">Agregar miembro</button></div>
+            <div class="table-wrap">
+              <table class="members-table"><thead><tr><th>N.º</th><th>Nombres y apellidos</th><th>Cédula</th><th>Nacionalidad</th><th></th></tr></thead><tbody id="members-body"></tbody></table>
+            </div>
+            <div id="members-empty" class="empty-state">Agrega al menos un miembro fundador.</div>
+          </section>
+
+          <section class="panel step-panel" data-step-panel="5">
+            <div class="panel-heading"><div><span class="step-label">Paso 5 de 6</span><h2>Checklist del artículo 14</h2></div><p>Marca cada requisito y registra una observación cuando corresponda.</p></div>
+            <div class="checklist-progress"><div><strong id="check-complete">0 de 0</strong><span>requisitos conformes</span></div><div class="progress-track"><span id="progress-bar"></span></div></div>
+            <div id="checklist" class="checklist"></div>
+          </section>
+
+          <section class="panel step-panel" data-step-panel="6">
+            <div class="panel-heading"><div><span class="step-label">Paso 6 de 6</span><h2>Resultado del análisis</h2></div><p>El resultado depende del estado del checklist y de los datos obligatorios.</p></div>
+            <div id="result-card" class="result-card pending">
+              <div class="result-icon" aria-hidden="true">…</div>
+              <div><h3 id="result-title">Revisión pendiente</h3><p id="result-description">Completa los datos y revisa todos los requisitos.</p></div>
+            </div>
+            <div id="missing-summary" class="missing-summary"></div>
+            <div class="document-grid">
+              <article class="document-card approval-doc"><span class="doc-type">DOCX</span><h3>Resolución de otorgamiento</h3><p>Aprueba y registra el estatuto, otorga personalidad jurídica e incorpora la nómina fundadora.</p><button type="button" class="button button-primary generate-approval" data-document="resolution">Descargar resolución</button></article>
+              <article class="document-card approval-doc"><span class="doc-type">DOCX</span><h3>Oficio de respuesta</h3><p>Comunica la aprobación del estatuto y el otorgamiento de personalidad jurídica.</p><button type="button" class="button button-primary generate-approval" data-document="response">Descargar oficio</button></article>
+              <article class="document-card approval-doc"><span class="doc-type">DOCX</span><h3>Informe jurídico</h3><p>Desarrolla antecedentes, normativa aplicable, análisis y conclusión favorable.</p><button type="button" class="button button-primary generate-approval" data-document="report">Descargar informe</button></article>
+              <article class="document-card observation-doc"><span class="doc-type">DOCX</span><h3>Observación al trámite</h3><p>Detalla requisitos incumplidos, fundamento y modo de subsanación.</p><button type="button" class="button button-warning" id="generate-observation">Descargar observación</button></article>
+            </div>
+            <div class="legal-update"><strong>Actualización normativa incluida</strong><p>Los documentos citan el Acuerdo MIT-MIT-25-60-ACU, el artículo 14, el procedimiento del artículo 16, la vigencia de la directiva provisional del artículo 17 y la Disposición General Tercera para trámites anteriores o en curso. Las referencias institucionales se emiten a nombre del MIT.</p></div>
+          </section>
+
+          <div class="form-actions"><button class="button button-ghost" type="button" id="previous-step">Anterior</button><span id="save-status">Borrador guardado</span><button class="button button-primary" type="button" id="next-step">Continuar</button></div>
+        </form>
+      </section>
+    </main>
+
+    <template id="member-row-template">
+      <tr><td class="row-number"></td><td><input data-member-field="name" aria-label="Nombres y apellidos" /></td><td><input data-member-field="id" aria-label="Cédula" /></td><td><input data-member-field="nationality" value="ECUATORIANA" aria-label="Nacionalidad" /></td><td><button class="icon-button remove-member" type="button" aria-label="Eliminar miembro">×</button></td></tr>
+    </template>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="assets/docx.js"></script>
+    <script src="documents-v8.js"></script>
+    <script src="app-v5.js"></script>
+  </body>
+</html>
